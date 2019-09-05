@@ -5,7 +5,6 @@
 #
 
 BOARD_VENDOR := samsung
-
 DEVICE_PATH := device/samsung/a70q
 
 # Architecture
@@ -79,10 +78,6 @@ BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET) --ramdisk_offset 
 BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET) --second_offset $(BOARD_KERNEL_SECOND_OFFSET) --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_MKBOOTIMG_ARGS += --pagesize $(BOARD_KERNEL_PAGESIZE) --board "SRPSG08A002"
 
-# Platform
-TARGET_BOARD_PLATFORM := sm6150
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno612
-
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
@@ -143,7 +138,6 @@ PRODUCT_PRIVATE_SEPOLICY_DIRS += \
 
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 
-
 # Verified Boot
 BOARD_AVB_ENABLE := true
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --set_hashtree_disabled_flag
@@ -152,9 +146,6 @@ BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 2
 # Properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 TARGET_PRODUCT_PROP += $(DEVICE_PATH)/product.prop
-
-# Soong namespaces
-PRODUCT_SOONG_NAMESPACES += $(DEVICE_PATH)
 
 # inherit from the proprietary version
 -include vendor/samsung/a70q/BoardConfigVendor.mk

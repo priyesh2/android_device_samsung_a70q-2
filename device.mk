@@ -104,6 +104,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
     frameworks/native/data/etc/android.hardware.sensor.hifi_sensors.xml:system/etc/permissions/android.hardware.sensor.hifi_sensors.xml
 
+# Soong namespaces
+PRODUCT_SOONG_NAMESPACES += \
+    $(LOCAL_PATH)
+
 # Telephony
 PRODUCT_PACKAGES += \
     telephony-ext
