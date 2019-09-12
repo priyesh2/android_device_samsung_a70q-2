@@ -21,9 +21,11 @@ PRODUCT_BUILD_SUPER_PARTITION := false
 
 # Overlays
 PRODUCT_PACKAGE_OVERLAYS += \
-    $(DEVICE_PATH)/overlay
+    $(DEVICE_PATH)/overlay \
+    $(DEVICE_PATH)/overlay-lineage
 
 PRODUCT_ENFORCE_RRO_TARGETS += *
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += $(DEVICE_PATH)/overlay-lineage/lineage-sdk
 
 # No A/B
 AB_OTA_UPDATER := false
@@ -39,7 +41,16 @@ PRODUCT_PACKAGES += \
 # HIDL
 PRODUCT_PACKAGES += \
     android.hidl.base@1.0 \
-    android.hidl.manager@1.0    
+    android.hidl.manager@1.0
+
+# Fingerprint feature
+PRODUCT_PACKAGES += \
+    vendor.samsung.hardware.biometrics.fingerprint@2.1-service.a70q \
+    lineage.biometrics.fingerprint.inscreen@1.0-service.a70q
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.fingerprint.xml \
+    vendor/lineage/config/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml
 
 # Init
 PRODUCT_PACKAGES += \
