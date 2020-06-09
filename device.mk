@@ -90,6 +90,10 @@ PRODUCT_PACKAGES += \
     fastbootd \
     init.recovery.qcom.rc
 
+# SamsungDoze
+PRODUCT_PACKAGES += \
+    SamsungDoze
+
 # Sensors
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl.a70q
