@@ -5,6 +5,7 @@
 #
 
 BOARD_VENDOR := samsung
+
 DEVICE_PATH := device/samsung/a70q
 
 # Architecture
@@ -77,6 +78,10 @@ BOARD_DTB_OFFSET := 0x01f00000
 BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET) --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --dtb_offset $(BOARD_DTB_OFFSET) 
 BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET) --second_offset $(BOARD_KERNEL_SECOND_OFFSET) --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_MKBOOTIMG_ARGS += --pagesize $(BOARD_KERNEL_PAGESIZE) --board "SRPSG08A002"
+
+# Platform
+TARGET_BOARD_PLATFORM := sm6150
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno612
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144
