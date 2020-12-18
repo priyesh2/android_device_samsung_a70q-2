@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The LineageOS Project
+ * Copyright (C) 2019 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,7 @@
 
 #define BRIGHTNESS_PATH "/sys/class/backlight/panel0-backlight/brightness"
 #define TSP_CMD_PATH "/sys/class/sec/tsp/cmd"
-#define FP_GREEN_CIRCLE "/sys/class/lcd/panel/fp_green_circle"
 #define MASK_BRIGHTNESS_PATH "/sys/class/lcd/panel/mask_brightness"
-#define FOD_DIMMING_PATH "/sys/class/lcd/panel/fod_dimming"
 
 #define SEM_FINGER_STATE 22
 #define SEM_PARAM_PRESSED 2
@@ -92,33 +90,28 @@ Return<void> FingerprintInscreen::onFinishEnroll() {
 }
 
 Return<void> FingerprintInscreen::onPress() {
-    set(FP_GREEN_CIRCLE, "1");
     std::thread([this]() {
-        std::this_thread::sleep_for(std::chrono::milliseconds(38));
-        mSehBiometricsFingerprintService->sehRequest(SEM_FINGER_STATE, 
+        std::this_thread::sleep_for(std::chrono::milliseconds(30));
+        mSehBiometricsFingerprintService->sehRequest(SEM_FINGER_STATE,
             SEM_PARAM_PRESSED, stringToVec(SEM_AOSP_FQNAME), FingerprintInscreen::requestResult);
     }).detach();
     return Void();
 }
 
 Return<void> FingerprintInscreen::onRelease() {
-    mSehBiometricsFingerprintService->sehRequest(SEM_FINGER_STATE, 
+    mSehBiometricsFingerprintService->sehRequest(SEM_FINGER_STATE,
         SEM_PARAM_RELEASED, stringToVec(SEM_AOSP_FQNAME), FingerprintInscreen::requestResult);
-    set(FP_GREEN_CIRCLE, "0");
     return Void();
 }
 
 Return<void> FingerprintInscreen::onShowFODView() {
     std::thread([]() {
-        std::this_thread::sleep_for(std::chrono::milliseconds(15));
-        set(FOD_DIMMING_PATH, "1");
+        std::this_thread::sleep_for(std::chrono::milliseconds(20));
     }).detach();
     return Void();
 }
 
 Return<void> FingerprintInscreen::onHideFODView() {
-    set(FP_GREEN_CIRCLE, "0");
-    set(FOD_DIMMING_PATH, "0");
     return Void();
 }
 
@@ -155,8 +148,8 @@ Return<void> FingerprintInscreen::setLongPressEnabled(bool) {
     return Void();
 }
 
-Return<int32_t> FingerprintInscreen::getDimAmount(int32_t /* cur_brightness */) {
-    return 0;
+Return<int32_t> FingerprintInscreen::getDimAmount(int32_t cur_brightness) {
+    return (int32_t)(255 + ( -40.9291 * pow((double) cur_brightness, 0.3)));
 }
 
 Return<bool> FingerprintInscreen::shouldBoostBrightness() {
@@ -172,15 +165,15 @@ Return<void> FingerprintInscreen::setCallback(const sp<IFingerprintInscreenCallb
 }
 
 Return<int32_t> FingerprintInscreen::getPositionX() {
-    return 447;
+    return 435;
 }
 
 Return<int32_t> FingerprintInscreen::getPositionY() {
-    return 2009;
+    return 2025;
 }
 
 Return<int32_t> FingerprintInscreen::getSize() {
-    return 185;
+    return 195;
 }
 
 }  // namespace implementation
