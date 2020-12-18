@@ -15,7 +15,6 @@ $(call inherit-product-if-exists, vendor/samsung/a70q/a70q-vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
 PRODUCT_TARGET_VNDK_VERSION := 28
-PRODUCT_SHIPPING_API_LEVEL := 28
 
 # Overlays
 PRODUCT_PACKAGE_OVERLAYS += \
